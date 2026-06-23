@@ -29,11 +29,31 @@ class WordSquare {
 
     return true;
   }
+    
+    // this function will be used to get the prefix of a word
+    getPrefix(square, column) {
+  let prefix = "";
+  for (let i = 0; i < square.length; i++) {
+    prefix += square[i][column];
+  }
+  return prefix;
+    }
+
 }
 
-const square = ["moan", "once", "acme", "need"];
+const square = ["moan", "once"];
 
 const wordSquare = new WordSquare(square);
 
-const candidateWords = trie.findWordsWithPrefix("mo");
-console.log(candidateWords);
+const prefix = wordSquare.getPrefix(square, square.length);
+
+console.log("Prefix:", prefix);
+
+const candidates = trie.findWordsWithPrefix(prefix);
+
+console.log(candidates.slice(0, 20));
+
+
+
+
+export { WordSquare };
