@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "vitest": "^4.1.9"
+  },
+"scripts": {
+  "test": "vitest",
+  "test:watch": "vitest --watch"  
+},
+"type": "module"
+}

@@ -66,6 +66,6 @@ for (let word of dictionary) {
 
 // Now, search for words with a prefix:
 const wordsWithCode = trie.findWordsWithPrefix("code");
-console.log(wordsWithCode.length);
+
 
 export { trie };
