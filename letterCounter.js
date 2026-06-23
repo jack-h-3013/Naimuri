@@ -12,12 +12,8 @@ function letterCounter(letters) {
 }
 
 // the dictionary file for this project
-const dictionary = readFileSync("../enable1.txt", "utf-8")
+const dictionary = readFileSync("./enable1.txt", "utf-8")
   .split("\n")
   .map((word) => word.trim());
-
-console.log(dictionary.length);
-console.log(dictionary[0]);
-console.log(dictionary[100]);
 
 export { letterCounter, dictionary };
