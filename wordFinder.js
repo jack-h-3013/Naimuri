@@ -1,5 +1,4 @@
 import { dictionary } from "./letterCounter.js";
-import { letterCounter } from "./letterCounter.js";
 
 // creating the trie style tree
 
@@ -15,6 +14,7 @@ class Trie {
     this.root = new TrieNode();
   }
 
+  // insert a word into the trie
   insert(word) {
     let node = this.root;
     for (let char of word) {
@@ -25,44 +25,47 @@ class Trie {
     }
     node.isWord = true;
   }
+
+  // find a node in the trie
+  findNode(prefix) {
+    let node = this.root;
+    for (const letter of prefix) {
+      if (!node.children[letter]) {
+        return null;
+      }
+      node = node.children[letter];
+    }
+    return node;
+  }
+
+  // collect all words with a given prefix
+  collectWords(node, prefix, words = []) {
+    if (node.isWord) {
+      words.push(prefix);
+    }
+    for (const letter in node.children) {
+      this.collectWords(node.children[letter], prefix + letter, words);
+    }
+    return words;
+  }
+
+  // find words with a given prefix
+  findWordsWithPrefix(prefix) {
+    const node = this.findNode(prefix);
+    if (!node) {
+      return [];
+    }
+    return this.collectWords(node, prefix);
+  }
 }
 
-const letters = "aaccdeeeemmnnnoo";
 const trie = new Trie();
 for (let word of dictionary) {
   trie.insert(word);
 }
 
-// filtering the list of words to match the length required
-function getWordsOfLength(words, length) {
-  return words.filter((word) => word.length === length);
-}
-
-// checking if a word can be built using the available letters
-function canIBuildAWord(word, availableLetters) {
-    const letterCounts = { ...availableLetters };
-    
-    for (const letter of word) {
-        if (!letterCounts[letter]) {
-            return false;
-        }
-        letterCounts[letter]--;
-    }
-    return true;
-}
-
-const availableLetters = letterCounter(letters);
-
-const fourLetterWords = getWordsOfLength(dictionary, 4).filter((word) => canIBuildAWord(word, availableLetters));
-
-console.log(fourLetterWords);
-
-
-
-
-
-
-
+// Now, search for words with a prefix:
+const wordsWithCode = trie.findWordsWithPrefix("code");
+console.log(wordsWithCode.length);
 
 export { trie };
-
