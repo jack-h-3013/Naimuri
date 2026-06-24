@@ -173,5 +173,7 @@ Final test results:
 
 The implementation evolved from an initial dictionary filtering approach into a Trie-based solution. The Trie provided a much more efficient way to search for candidate words using prefixes generated from partially completed word squares.
 
+Node version v26.3.0
+
 The final solution successfully solves all supplied challenge inputs while maintaining a relatively simple and readable codebase.
 
